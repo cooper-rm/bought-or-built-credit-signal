@@ -1,0 +1,28 @@
+name: credit-signal
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  # core data stack — versions bounded so ydata-profiling and the modeling stack share one env
+  - pandas<3        # ydata-profiling requires pandas<3
+  - numpy<2.4       # numba (shap dependency) rejects numpy>=2.4
+  - scipy<1.17      # ydata-profiling pins scipy<1.17
+  - scikit-learn
+  - setuptools<81   # ydata-profiling needs pkg_resources, dropped in setuptools 81+
+  # viz
+  - matplotlib<=3.10  # ydata-profiling pins matplotlib<=3.10
+  - seaborn
+  # modeling / feature selection
+  - lightgbm
+  - xgboost
+  - catboost
+  - shap
+  - optuna
+  - pytorch
+  # notebooks
+  - jupyterlab
+  - ipykernel
+  # auto-EDA (pip: pins pandas<3, not usable with pandas 3)
+  - pip
+  - pip:
+      - ydata-profiling
